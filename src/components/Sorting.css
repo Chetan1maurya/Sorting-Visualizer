@@ -1,0 +1,439 @@
+/* .container {
+  display: flex;
+}
+.main-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(18, 18, 58);
+  min-height: 100vh;
+  padding: 2rem 7rem;
+}
+.graph {
+  display: flex;
+  gap: 20px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  width: 50rem;
+  height: 40rem;
+  justify-content: center;
+}
+.bar {
+  width: 3rem;
+  background-color: blue;
+  color: white;
+  padding: 10px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  border-radius: 4px;
+  min-height: 2.5rem;
+  transition: all linear 0.5s;
+}
+.comparing {
+  background-color: rgb(67, 92, 43);
+}
+.buttons {
+  width: 50rem;
+  display: flex;
+  justify-content: space-around;
+}
+.buttons .graph-control {
+  margin-top: 20px;
+  height: 50px;
+  width: 220px;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+.main-box h1 {
+  color: white;
+  padding-top: 20px;
+}
+.box2 {
+  width: fit-content;
+  margin-left: 17rem;
+  background-color: rgb(32, 56, 100);
+  color: white;
+  font-size: 20px;
+  border-radius: 7px;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 1rem;
+  padding: 10px;
+}
+
+.details-box {
+  background: linear-gradient(135deg, #0b0b2b, #1c1f4a);
+  width: 100vw;
+  padding: 2rem;
+  color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.row1,
+.row2 {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.detail-card {
+  padding: 20px;
+  height: 200px;
+  width: 300px;
+  flex: (1, 1, 30%);
+  border-radius: 12px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #f0e4e4;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.detail-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+}
+
+.detail-card span {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+  animation: fadeIn 1s ease-in-out;
+}
+.detail-card .getInfo {
+  background-color: transparent;
+  border: none;
+  position: relative;
+  top: 20px;
+  left: 70px;
+  color: rgb(224, 213, 213);
+}
+.box2 {
+  width: 80%;
+  margin: 2rem auto;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 2rem;
+  color: white;
+  animation: fadeSlideIn 1s ease-in-out;
+}
+
+.box2-heading {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid #00ffe1;
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.sort-message {
+  color: #00ff00;
+  font-weight: bold;
+  font-size: 1.2rem;
+  animation: fadeInScale 0.8s ease-in-out;
+} */
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* 1. Make graph and buttons responsive */
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.main-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(18, 18, 58);
+  min-height: 100vh;
+  padding: 2rem 7rem;
+  width: 65%;
+}
+
+.graph {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 20px 0;
+  overflow-x: auto; 
+  width: 100%;
+  flex-wrap:nowrap;
+}
+
+.bar {
+  flex: 1 1 auto; 
+  min-width: 5px;
+  max-width: 30px; 
+  margin: 0 2px;
+  background-color: blue;
+  color: white;
+  padding: 10px 0;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all linear 0.5s;
+}
+
+.comparing {
+  background-color: rgb(67, 92, 43);
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.buttons .graph-control {
+  margin-top: 20px;
+  height: 50px;
+  width: 220px;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.main-box h1 {
+  color: white;
+  padding-top: 20px;
+}
+
+
+.box2 {
+  width: fit-content;
+  margin-left: 17rem;
+  background-color: rgb(32, 56, 100);
+  color: white;
+  font-size: 20px;
+  border-radius: 7px;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 1rem;
+  padding: 10px;
+}
+
+.box2 {
+  width: 80%;
+  margin: 2rem auto;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 2rem;
+  color: white;
+  animation: fadeSlideIn 1s ease-in-out;
+}
+
+.box2-heading {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid #00ffe1;
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.sort-message {
+  color: #00ff00;
+  font-weight: bold;
+  font-size: 1.2rem;
+  animation: fadeInScale 0.8s ease-in-out;
+}
+
+
+.details-box {
+  background: linear-gradient(135deg, #0b0b2b, #1c1f4a);
+  width: 35%;
+  padding: 2rem;
+  color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.row1,
+.row2 {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.detail-card {
+  padding: 20px;
+  height: 200px;
+  width: 300px;
+  border-radius: 12px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #f0e4e4;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.detail-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+}
+
+.detail-card span {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.detail-card .getInfo {
+  background-color: transparent;
+  border: none;
+  position: relative;
+  top: 20px;
+  left: 70px;
+  color: rgb(224, 213, 213);
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* MEDIA QUERIES */
+
+/* Medium screen (Tablet) */
+@media (max-width: 1024px) {
+  .graph {
+    height: 35rem;
+  }
+
+  .main-box {
+    width: 100%;
+    padding: 2rem;
+  }
+
+  .details-box {
+    width: 100%;
+  }
+}
+
+/* Small screen (Mobile) */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .main-box {
+    order: 1;
+    width: 100%;
+    padding: 1.5rem;
+  }
+
+  .details-box {
+    order: 2;
+    width: 100%;
+    padding: 1.5rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .buttons .graph-control {
+    width: 70%;
+    margin: 10px 0;
+  }
+
+  .bar {
+    width: 1.7rem;
+    font-size: 16px;
+  }
+
+  .graph {
+    flex-wrap: wrap;
+    height: auto;
+  }
+}
