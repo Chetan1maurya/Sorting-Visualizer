@@ -1,0 +1,17 @@
+.inputBox{
+    flex: 1 1 auto;
+    white-space: normal;
+    background-color: rgba(53, 9, 9, 0.541);
+    color:white;
+    padding: 10px;
+    border:none;
+    line-height: 3rem;
+    margin-top: 30px;
+    border-radius: 4px;
+    font-size: 2rem;
+    width: 100%;
+    max-width: 100%;
+}
+.inputBox:focus{
+    outline:none;
+}

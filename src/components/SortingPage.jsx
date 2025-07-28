@@ -1,17 +1,20 @@
 import React from "react";
 import { useEffect, useState,useRef } from "react";
 import "./Sorting.css";
-// import Graph from './graph.jsx'
+import Graph from './Graph.jsx'
 import AITech from './AIcomponent'
+import TCModal from './TCModal.jsx'
+import AIModal from './AIModal.jsx'
+
 const SortingPage = ({ funcName , name}) => {
   const [arr, setArr] = useState([]);
   const [compIndices, setCompIndices] = useState([]);
-  const [step, setStep] = useState("");
   const [comparison, setComparison] = useState(0);
-  const [message, setMessage] = useState("");
   const [paused,setPaused] = useState(false);
   const pausedRef = useRef(false);
-  
+  const [showTCModal,setShowTCModal] = useState(false);
+  const [showAIModal,setShowAIModal] = useState(false);
+
   const time_complexity = {
     bubbleSort: "O(n²)",
     selectionSort: "O(n²)",
@@ -57,41 +60,31 @@ const SortingPage = ({ funcName , name}) => {
   return (
     <>
       <div className="container">
-        <div className="main-box">
-          <div className="box1">
-            <div className="graph">
-              {arr.map((num, index) => (
-                <div
-                  className={`bar ${
-                    compIndices.includes(index) ? "comparing" : ""
-                  }`}
-                  key={index}
-                  // style={{ height: `${num * 18 + 30}px` }}
-                  style={{ height: `${num+2}rem` }}
-                >
-                  {num}
-                </div>
-              ))}
-            </div>
-            <div className="buttons">
-              <button className="graph-control" onClick = {() => setPaused(!paused)}>{paused?'Resume':'Pause'}</button>
-              <button className="graph-control"
-                onClick={() =>
-                  funcName(arr, setArr, setCompIndices, setStep, setComparison,setMessage,waitWhilePaused)
-                }
-              >
-                {paused?'Restart':'Start'}
-              </button>
-            </div>
-          </div>
-          <h1>{name}</h1>
-        </div>
+        <Graph
+          arr={arr}
+          compIndices={compIndices}
+          paused={paused}
+          setPaused={setPaused}
+          funcName={funcName}
+          name = {name}
+          setArr={setArr}
+          setCompIndices={setCompIndices}
+          setComparison={setComparison}
+          waitWhilePaused={waitWhilePaused}
+        />
         <div className="details-box">
           <div className="row1">
             <div className="detail-card">
               Time Complexity
               Space Complexity
-              <button className="getInfo">Comming Soon</button>
+              <button className="getInfo" onClick={()=>setShowTCModal(true)}><i class="ri-send-plane-fill"></i></button>
+              <TCModal isOpen={showTCModal} onClose={()=>setShowTCModal(false)}>
+                <div className="tcandsc">
+                  <h3>Time Complexity : {time_complexity[funcName.name]}</h3> 
+                  <h3>Space Complexity : {space_complexity[funcName.name]}</h3>
+                </div>
+                <h4>Other Details: {details[funcName.name]}</h4>
+              </TCModal>
             </div>
             <div className="detail-card">
               Number of Comparision are{" "}
@@ -103,28 +96,17 @@ const SortingPage = ({ funcName , name}) => {
           <div className="row2">
             <div className="detail-card">
               Enter Custom Data{" "}
-              <button className="getInfo">Comming Soon</button>
+              <button className="getInfo"><i class="ri-send-plane-fill"></i></button>
             </div>
             <div className="detail-card">
-              <AITech />
-              <button className="getInfo">Comming Soon</button>
+              Saastri Ji
+              <button className="getInfo" onClick = {() => setShowAIModal(true)}><i class="ri-send-plane-fill"></i></button>
+              <AIModal isOpen = {showAIModal} onClose = {()=>setShowAIModal(false)}>
+                <h2>Abhi backend padh loo fir banata hu!😉</h2>
+                <textarea type="text" className="inputBox" placeholder="Comming Soon..."></textarea>
+                <button>Submit</button>
+              </AIModal>
             </div>
-          </div>
-          <div className="box2">
-            <h2 className="box2-heading">Steps Involved</h2>
-            <p>{step}</p>
-            {message && (
-              <div
-                className="sort-message"
-                style={{
-                  marginTop: "20px",
-                  color: "green",
-                  fontWeight: "bold",
-                }}
-              >
-                {message}
-              </div>
-            )}
           </div>
         </div>
       </div>

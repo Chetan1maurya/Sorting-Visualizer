@@ -9,8 +9,9 @@ export const bubbleSort = async (
   setStep,
   setComparison,
   setMessage,
+  speedRef,
   waitWhilePaused,
-  delay = 1000
+  delay = 2000
 ) => {
   let a = [...arr];
   const n = a.length;
@@ -20,7 +21,8 @@ export const bubbleSort = async (
       setComparison((prev) => prev + 1);
       setCompIndices([j, j + 1]);
       setStep(`Comparing ${a[j]} and ${a[j + 1]}`);
-      await sleep(1000);
+      await sleep(delay - (speedRef.current-1)*1000);
+      console.log(speedRef.current)
       if (a[j] > a[j + 1]) {
         [a[j], a[j + 1]] = [a[j + 1], a[j]];
         await waitWhilePaused();    // check for pause
@@ -32,7 +34,7 @@ export const bubbleSort = async (
         setStep('No need to Swap')
       }
       // setCompIndices([]);
-      await sleep(delay);
+      await sleep(delay - (speedRef.current-1)*1000);
     }
   }
   setStep("");
@@ -47,6 +49,7 @@ export const selectionSort = async (
   setStep,
   setComparison,
   setMessage,
+  speedRef,
   waitWhilePaused,
   delay = 1000
 ) => {
@@ -102,6 +105,7 @@ export const insertionSort = async (
   setStep,
   setComparison,
   setMessage,
+  speedRef,
   waitWhilePaused,
   delay = 1000
 ) => {
@@ -149,6 +153,7 @@ export const mergeSort = async (
   setStep,
   setComparison,
   setMessage,
+  speedRef,
   waitWhilePaused,
   delay = 1000
 ) => {
@@ -222,6 +227,7 @@ export const quickSort = async (
   setStep,
   setComparison,
   setMessage,
+  speedRef,
   waitWhilePaused,
   delay = 1000
 ) => {
@@ -277,6 +283,7 @@ export const heapSort = async (
   setStep,
   setComparison,
   setMessage,
+  speedRef,
   waitWhilePaused,
   delay = 1000
 ) => {
