@@ -1,0 +1,90 @@
+.front-page {
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at bottom, #1a1c57, #0d0d2b);
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Stars */
+.front-page::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: transparent url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
+  animation: starsMove 100s linear infinite;
+}
+
+@keyframes starsMove {
+  from { transform: translate(0, 0); }
+  to { transform: translate(-500px, -500px); }
+}
+
+
+.sorting_name{
+  display:flex;
+  gap: 2vmax;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+}
+
+.start {
+  font-size: 1.5rem;
+  padding: 0.8rem 2rem;
+  border-radius: 10px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  max-width: 90%;
+  width: 200px;
+}
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+.tagline{
+  font-weight: 400;
+  color:white;
+}
+.baseline{
+  bottom: 1rem;                              
+}
+@media (max-width: 768px) {
+  .app-heading {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+  .front-page {
+    gap: 0.7rem;
+  }
+  .drop-down {
+    font-size: 1.2rem;
+    padding: 0.6rem 1rem;
+  }
+  .start {
+    font-size: 1.2rem;
+    padding: 0.6rem 2rem;
+    width: 180px;
+  }
+}
+@media (max-width: 480px){
+  .front-page{
+    gap: 0.3rem;
+  }
+
+  .start{
+    padding: 0.6rem 0.1rem;
+    font-size: 0.9rem;
+    width: 150px;
+  }
+}

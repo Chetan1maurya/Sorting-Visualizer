@@ -13,6 +13,7 @@
   min-height: 100vh;
   padding: 2rem 7rem;
   width: 65%;
+  border-right: 1px solid white;
 }
 .box1{
   width: 100%;
@@ -20,6 +21,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 80rem;
 }
 .graph {
   display: flex;
@@ -29,6 +31,7 @@
   overflow-x: auto; 
   width: 90%;
   flex-wrap:nowrap;
+  max-width: 70rem;
 }
 
 .bar {
@@ -48,21 +51,22 @@
 }
 
 .comparing {
-  background-color: rgb(67, 92, 43);
+  background-color: rgb(104, 211, 5);
 }
 .speed{
   font-size: 20px;
   color:rgb(255, 255, 255);
   background-color:transparent;
   border:none;
-  padding: 0 50px 0 40px;
+  padding: 0 3vmax 0 3vmax;
   border-radius: 5px;
 }
 .buttons {
-  width: 100%;
+  width: 70%;
   display: flex;
   justify-content: space-around;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  gap: 2rem;
 }
 .incdec{
   display:flex;
@@ -88,17 +92,19 @@
   font-size: 20px;
   font-weight: 600;
   border-radius: 8px;
+  border:none;
 }
 
 .main-box h1 {
   color: white;
   padding-top: 20px;
+  font-size: 30px;
 }
 
  .box2 {
   width: 80%; 
   margin: 2rem auto;
-  background: rgba(255, 255, 255, 0.05); /* Or rgb(32, 56, 100) if you prefer */
+  background: rgba(255, 255, 255, 0.05);
   color: white;
   font-size: 20px;
   border-radius: 12px;
@@ -107,11 +113,12 @@
   padding: 2rem;
   border: 2px solid rgba(255, 255, 255, 0.1);
   animation: fadeSlideIn 1s ease-in-out;
+  max-width: 80rem;
 }
 
 
 .box2-heading {
-  font-size: 2rem;
+  font-size: 1.6rem;
   margin-bottom: 1rem;
   text-transform: uppercase;
   border-bottom: 2px solid #00ffe1;
@@ -151,11 +158,11 @@
   flex:1 1 auto;
   padding: 20px;
   height: 200px;
-  min-width: 340px;
-  max-width: 390px;
+  min-width: 240px;
+  max-width: 400px;
   border-radius: 12px;
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: 400;
   color: #f0e4e4;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   display: flex;
@@ -164,6 +171,7 @@
   align-items: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+  position:relative;
 }
 
 .detail-card:hover {
@@ -172,7 +180,7 @@
 }
 
 .detail-card span {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: bold;
   color: white;
   animation: fadeIn 1s ease-in-out;
@@ -182,9 +190,9 @@
   font-size: 2rem;
   background-color: transparent;
   border: none;
-  position: relative;
-  top: 20px;
-  left: 140px;
+  position: absolute;
+  bottom: 3vh;
+  right: 4vh;
   color: rgb(224, 213, 213);
   transition: all 0.3s ease-in-out;
 }
@@ -234,6 +242,8 @@
   .main-box {
     width: 100%;
     padding: 2rem;
+    border-right: none;
+    border-bottom: 1px solid white;
   }
 
   .details-box {
@@ -260,12 +270,14 @@
   }
 
   .buttons {
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
   }
-
+  .buttons .speed-control{
+    width: 18vmin;
+  }
   .buttons .graph-control {
-    width: 70%;
+    width: 40%;
     margin: 10px 0;
   }
 
@@ -278,7 +290,28 @@
     flex-wrap: wrap;
     height: auto;
   }
+  .detail-card{
+    font-size: 1.5rem;
+    height: 250px;
+  }
   .detail-card .getInfo {
     font-size: 1.5rem;
+  }
+}
+@media(max-width: 480px){
+  .buttons{
+    flex-wrap: nowrap;
+  }
+  .buttons .graph-control{
+    padding: 2px 0 2px 0;
+    width: 7rem;
+    font-size: 1rem;
+    height: 2rem;
+  }
+  .speed-control{
+    height: 2.4rem;
+  }
+  .speed{
+    width: 100%;
   }
 }

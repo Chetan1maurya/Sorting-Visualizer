@@ -1,0 +1,44 @@
+.sorting_box {
+  position: relative; /* now inside wrapper */
+  z-index: 1;
+  padding: 1rem;
+  width: 20vw;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: clamp(1rem, 3vmin, 1.7rem); /* responsive font size */
+  font-weight: 800;
+  color: white;
+  cursor: pointer;   
+  background-color: rgb(86, 15, 151);     
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.sorting_box:hover {
+  transform: scale(1.05); /* subtle hover scale */
+}
+
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Responsive tweaks */
+@media (max-width: 1270px) {
+  .sorting_box {
+    width: 32vw;
+    font-size: clamp(1rem, 3.2vmin, 1.6rem);
+  }
+}
+@media (max-width: 851px) {
+  .sorting_box {
+    font-size: clamp(1rem, 3vmin, 1.5rem);
+    width: 55vw;
+  }
+}
+

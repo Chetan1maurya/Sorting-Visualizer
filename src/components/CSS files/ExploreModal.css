@@ -1,0 +1,74 @@
+.modal-overlap{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    top:0;
+    left:0;
+    background-color: rgba(0, 0, 0, 0.5);
+    position:fixed;
+    min-height: 100vh;
+    width: 100%;
+}
+.modal-box{
+  background-color: #2a0846;
+  color:white;
+  width: 85%;
+  max-width: 700px;
+  height: 400px;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.modal-close{
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background-color: transparent;
+  color: white;
+  font-size: 3.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+.modal-close:hover{
+    transform:rotate(180deg);
+}
+.imp{
+    white-space: pre-line;
+    overflow: auto;
+    font-size: 1.6rem;
+}
+@media (max-width: 1024px){
+    .modal-close{
+        font-size: 2.9rem;
+    }
+    .imp{
+        font-size: 1.4rem;
+    }
+    .modal-box{
+        height: 50vh;
+    }
+}
+@media (max-width: 480px){
+    .modal-close{
+        font-size: 2rem;
+    }
+    .imp{
+        font-size: 1rem;
+    }
+    .modal-box{
+        height: 40vh;
+    }
+}

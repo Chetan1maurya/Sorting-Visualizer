@@ -51,7 +51,7 @@ export const selectionSort = async (
   setMessage,
   speedRef,
   waitWhilePaused,
-  delay = 1000
+  delay = 2000
 ) => {
   let a = [...arr];
   const n = a.length;
@@ -60,21 +60,21 @@ export const selectionSort = async (
     let min = i;
     await waitWhilePaused();    // check for pause 
     setStep(`Assume ${a[min]} at index ${min} is the minimum`);
-    await sleep(delay);
+    await sleep(delay - (speedRef.current-1)*1000);
 
     for (let j = i + 1; j < n; j++) {
       await waitWhilePaused();    // check for pause 
       setCompIndices([min, j]); // Highlight comparison
       setComparison((prev) => prev + 1);
       setStep(`Comparing ${a[min]} and ${a[j]}`);
-      await sleep(delay);
+      await sleep(delay - (speedRef.current-1)*1000);
 
       if (a[j] < a[min]) {
         min = j;
         await waitWhilePaused();    // check for pause 
         setStep(`${a[min]} is now the new minimum`);
         setCompIndices([i, min]); // Highlight current index and new min
-        await sleep(delay);
+        await sleep(delay - (speedRef.current-1)*1000);
       }
     }
 
@@ -83,11 +83,11 @@ export const selectionSort = async (
       await waitWhilePaused();    // check for pause 
       setArr([...a]);
       setStep(`Swapping ${a[min]} with ${a[i]}`);
-      await sleep(delay);
+      await sleep(delay - (speedRef.current-1)*1000);
     } else {
       await waitWhilePaused();    // check for pause 
       setStep(`No swap needed for index ${i}`);
-      await sleep(delay);
+      await sleep(delay - (speedRef.current-1)*1000);
     }
     await waitWhilePaused();    // check for pause 
     setCompIndices([]);
@@ -117,27 +117,27 @@ export const insertionSort = async (
     let j = i - 1;
     await waitWhilePaused();    // check for pause 
     setStep(`Inserting ${key} at correct position`);
-    await sleep(delay);
+    await sleep(delay - (speedRef.current-1)*1000);
 
     while (j >= 0 && a[j] > key) {
       await waitWhilePaused();    // check for pause 
       setComparison((prev) => prev + 1);
       setCompIndices([j, j + 1]);
       setStep(`Comparing ${a[j]} and ${key}`);
-      await sleep(delay);
+      await sleep(delay - (speedRef.current-1)*1000);
 
       a[j + 1] = a[j];
       await waitWhilePaused();    // check for pause 
       setArr([...a]);
       setStep(`${a[j]} moved to position ${j + 1}`);
-      await sleep(delay);
+      await sleep(delay - (speedRef.current-1)*1000);
       j--;
     }   
     a[j + 1] = key;
     await waitWhilePaused(); 
     setArr([...a]);
     setStep(`${key} inserted at position ${j + 1}`);
-    await sleep(delay);
+    await sleep(delay - (speedRef.current-1)*1000);
     setCompIndices([]);
   }
   
@@ -159,7 +159,7 @@ export const mergeSort = async (
 ) => {
   const sleepAndSet = async (step) => {
     setStep(step);
-    await sleep(delay);
+    await sleep(delay - (speedRef.current-1)*1000);
   };
 
   async function mergeSortHelper(a, l, r) {
@@ -190,21 +190,21 @@ export const mergeSort = async (
       }
       await waitWhilePaused(); 
       setArr([...a]);
-      await sleep(delay);
+      await sleep(delay - (speedRef.current-1)*1000);
     }
 
     while (i < left.length) {
       a[k++] = left[i++];
       await waitWhilePaused(); 
       setArr([...a]);
-      await sleep(delay);
+      await sleep(delay - (speedRef.current-1)*1000);
     }
 
     while (j < right.length) {
       a[k++] = right[j++];
       await waitWhilePaused(); 
       setArr([...a]);
-      await sleep(delay);
+      await sleep(delay - (speedRef.current-1)*1000);
     }
     await waitWhilePaused(); 
     setCompIndices([]);
@@ -233,7 +233,8 @@ export const quickSort = async (
 ) => {
   const sleepAndSet = async (step) => {
     setStep(step);
-    await sleep(delay);
+     await waitWhilePaused(); 
+    await sleep(delay - (speedRef.current-1)*1000);
   };
 
   async function partition(a, low, high) {
@@ -245,6 +246,7 @@ export const quickSort = async (
     for (let j = low; j < high; j++) {
       setComparison((prev) => prev + 1);
       setCompIndices([j, high]);
+       await waitWhilePaused(); 
       await sleepAndSet(`Comparing ${a[j]} with pivot ${pivot}`);
       if (a[j] < pivot) {
         i++;
@@ -255,6 +257,7 @@ export const quickSort = async (
     }
     [a[i + 1], a[high]] = [a[high], a[i + 1]];
     setArr([...a]);
+     await waitWhilePaused(); 
     await sleepAndSet(`Placed pivot ${pivot} at correct position`);
     return i + 1;
   }
@@ -262,12 +265,14 @@ export const quickSort = async (
   async function quickSortHelper(a, low, high) {
     if (low < high) {
       let pi = await partition(a, low, high);
+       await waitWhilePaused(); 
       await quickSortHelper(a, low, pi - 1);
       await quickSortHelper(a, pi + 1, high);
     }
   }
 
   let a = [...arr];
+   await waitWhilePaused(); 
   await quickSortHelper(a, 0, a.length - 1);
   setArr([...a]);
   setStep('');
@@ -299,7 +304,8 @@ export const heapSort = async (
       setComparison((prev) => prev + 1);
       setCompIndices([i, left]);
       setStep(`Comparing ${a[i]} and ${a[left]}`);
-      await sleep(delay);
+       await waitWhilePaused(); 
+      await sleep(delay - (speedRef.current-1)*1000);
       if (a[left] > a[largest]) largest = left;
     }
 
@@ -307,7 +313,8 @@ export const heapSort = async (
       setComparison((prev) => prev + 1);
       setCompIndices([largest, right]);
       setStep(`Comparing ${a[largest]} and ${a[right]}`);
-      await sleep(delay);
+       await waitWhilePaused(); 
+      await sleep(delay - (speedRef.current-1)*1000);
       if (a[right] > a[largest]) largest = right;
     }
 
@@ -315,7 +322,8 @@ export const heapSort = async (
       [a[i], a[largest]] = [a[largest], a[i]];
       setArr([...a]);
       setStep(`Swapping ${a[i]} and ${a[largest]}`);
-      await sleep(delay);
+       await waitWhilePaused(); 
+      await sleep(delay - (speedRef.current-1)*1000);
       await heapify(n, largest);
     }
   };
@@ -323,6 +331,7 @@ export const heapSort = async (
   // Build max heap
   for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
     await heapify(n, i);
+     await waitWhilePaused(); 
   }
 
   // Extract elements one by one
@@ -330,7 +339,8 @@ export const heapSort = async (
     [a[0], a[i]] = [a[i], a[0]];
     setArr([...a]);
     setStep(`Swapping max element ${a[i]} to end`);
-    await sleep(delay);
+     await waitWhilePaused(); 
+    await sleep(delay - (speedRef.current-1)*1000);
     await heapify(i, 0);
   }
 

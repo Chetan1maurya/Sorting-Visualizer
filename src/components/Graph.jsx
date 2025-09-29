@@ -1,21 +1,34 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
-import "./Sorting.css";
-const Graph = ({arr,compIndices,paused,setPaused,funcName,name,setArr,setCompIndices,setComparison,waitWhilePaused}) => {
-    const [step, setStep] = useState("");
-    const [message, setMessage] = useState("");
-    const [speed,setSpeed] = useState(1)
-    const speedRef = useRef(1);
-    const handleSpeed = (val,name) => {
-      if(name == "dec" && val >= 1){
-        speedRef.current = val;
-        setSpeed(val);
-      }
-      if(name == "inc" && val <= 2){
-         speedRef.current = val;
-         setSpeed(val);
-      }
+import "./CSS files/Sorting.css";
+const Graph = ({
+  arr,
+  compIndices,
+  paused,
+  setPaused,
+  funcName,
+  name,
+  setArr,
+  setMessage,
+  setStep,
+  setCompIndices,
+  setComparison,
+  waitWhilePaused,
+}) => {
+  // const [step, setStep] = useState("");
+  // const [message, setMessage] = useState("");
+  const [speed, setSpeed] = useState(1);
+  const speedRef = useRef(1);
+  const handleSpeed = (val, name) => {
+    if (name == "dec" && val >= 1) {
+      speedRef.current = val;
+      setSpeed(val);
     }
+    if (name == "inc" && val <= 2) {
+      speedRef.current = val;
+      setSpeed(val);
+    }
+  };
   return (
     <div className="main-box">
       <div className="box1">
@@ -27,7 +40,7 @@ const Graph = ({arr,compIndices,paused,setPaused,funcName,name,setArr,setCompInd
               }`}
               key={index}
               // style={{ height: `${num * 18 + 30}px` }}
-              style={{ height: `${num + 7}rem` }}
+              style={{ height: `${num + 7}vmax` }}
             >
               {num}
             </div>
@@ -37,11 +50,6 @@ const Graph = ({arr,compIndices,paused,setPaused,funcName,name,setArr,setCompInd
           <button className="graph-control" onClick={() => setPaused(!paused)}>
             {paused ? "Resume" : "Pause"}
           </button>
-          <div className="speed-control">
-          <button className="incdec" onClick={() => handleSpeed(speed-0.5,"dec")}>-</button>
-          <button className="speed" style={{width: "30px"}} onClick={() => handleSpeed(speed+0.5)}>{speed}</button>
-          <button className="incdec" onClick={() => handleSpeed(speed+0.5,"inc")}>+</button>
-          </div>
           <button
             className="graph-control"
             onClick={() =>
@@ -60,24 +68,29 @@ const Graph = ({arr,compIndices,paused,setPaused,funcName,name,setArr,setCompInd
             Start
           </button>
         </div>
+        <div className="speed-control">
+          <button
+            className="incdec"
+            onClick={() => handleSpeed(speed - 0.5, "dec")}
+          >
+            -
+          </button>
+          <button
+            className="speed"
+            style={{ width: "10px" }}
+            onClick={() => handleSpeed(speed + 0.5)}
+          >
+            {speed}
+          </button>
+          <button
+            className="incdec"
+            onClick={() => handleSpeed(speed + 0.5, "inc")}
+          >
+            +
+          </button>
+        </div>
       </div>
       <h1>{name}</h1>
-      <div className="box2">
-            <h2 className="box2-heading">Steps Involved</h2>
-            <p>{step}</p>
-            {message && (
-              <div
-                className="sort-message"
-                style={{
-                  marginTop: "20px",
-                  color: "green",
-                  fontWeight: "bold",
-                }}
-              >
-                {message}
-              </div>
-            )}
-          </div>
     </div>
   );
 };
