@@ -16,3 +16,4 @@ const SortingNameCard = ({ name, onClick}) => {
 };
 
 export default SortingNameCard;
+

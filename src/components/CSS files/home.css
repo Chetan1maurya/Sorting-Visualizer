@@ -24,7 +24,32 @@
   from { transform: translate(0, 0); }
   to { transform: translate(-500px, -500px); }
 }
+.my_star{
+  height: 5vmax;
+  width: 5vmax;
+  z-index: -2;
+  animation: spin 12s linear infinite;
+} 
+@keyframes spin{
+  from {
+    tranform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}
 
+.man{
+  position: absolute;
+  opacity: 0.1;
+  height: 40vmax;
+}
+
+.firstHeading{
+  font-size: 5.3vmax;
+  text-align: center;
+  margin-top: 50px;
+}
 
 .sorting_name{
   display:flex;
@@ -47,8 +72,10 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   max-width: 90%;
   width: 200px;
+  z-index: 2;
+  margin: 20px 0 10px 0;
 }
-button:hover {
+.start:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 }
@@ -57,7 +84,8 @@ button:hover {
   color:white;
 }
 .baseline{
-  bottom: 1rem;                              
+  bottom: 1rem;   
+  text-align: center;                           
 }
 @media (max-width: 768px) {
   .app-heading {
@@ -81,7 +109,6 @@ button:hover {
   .front-page{
     gap: 0.3rem;
   }
-
   .start{
     padding: 0.6rem 0.1rem;
     font-size: 0.9rem;

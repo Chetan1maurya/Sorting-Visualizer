@@ -4,9 +4,9 @@ import './CSS files/TCModal.css'
 const TCModal = ({isOpen,onClose,children}) => {
   if (!isOpen) return null;
   return ReactDOM.createPortal(
-    <div className="modal-overlap" onClick={onClose}>
-        <div className="modal-box" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={onClose}><i class="ri-close-circle-fill"></i></button>
+    <div className="modal2-overlap" onClick={onClose}>
+        <div className="modal2-box" onClick={(e) => e.stopPropagation()}>
+            <button className="modal2-close" onClick={onClose}><i class="ri-close-circle-fill"></i></button>
             {children}
         </div>
     </div>,

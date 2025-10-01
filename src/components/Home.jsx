@@ -1,15 +1,17 @@
-import { React, useState } from "react";
+import { React, useState, useRef, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { TypeAnimation } from "react-type-animation";
 import SortingNameCard from "./SortingNameCard";
-import Particles from "react-tsparticles";
-
+import Star from "../assets/star1.svg?react";
+import SortSVG from "../assets/sortMan.svg?react";
+import Sorting from "../assets/sorting.svg?react";
 import "./CSS files/home.css";
 
 const Home = () => {
   const navigate = useNavigate();
   const [selectedAlgo, setSelectedAlgo] = useState("Selection Sorting");
   const [textColor, setTextColor] = useState("red");
+
   const algo = [
     "Selection Sorting",
     "Bubble Sorting",
@@ -21,32 +23,36 @@ const Home = () => {
   return (
     <>
       <div className="front-page">
+        <Sorting className="man"/>
+        <div className="firstHeading">Let's Visualize <Star className="my_star" /></div>
         <div
           style={{
-            fontSize: "2.5vmax",
+            fontSize: "2vmax",
             color: textColor,
+            textAlign: "center",
+            paddingBottom: "40px",
           }}
         >
           <TypeAnimation
             preRenderFirstString={true}
             sequence={[
               500,
-              "Let's Visualize Selection Sorting", // initially rendered starting point
+              "Selection Sorting", // initially rendered starting point
               () => setTextColor("aqua"),
               1000,
-              "Let's Visualize Bubble Sorting",
+              "Bubble Sorting",
               () => setTextColor("deeppink"),
               1000,
-              "Let's Visualize Insertion Sorting",
+              "Insertion Sorting",
               () => setTextColor("darkkhaki"),
               1000,
-              "Let's Visualize Merge Sorting",
+              "Merge Sorting",
               () => setTextColor("aqua"),
               1000,
-              "Let's Visualize Quick Sorting",
+              "Quick Sorting",
               () => setTextColor("deeppink"),
               1000,
-              "Let's Visualize Heap Sorting",
+              "Heap Sorting",
               () => setTextColor("darkkhaki"),
               500,
             ]}
@@ -57,7 +63,11 @@ const Home = () => {
         </div>
         <div className="sorting_name">
           {algo.map((algoname, index) => (
-            <SortingNameCard key={index} name={algoname} onClick={() => setSelectedAlgo(algoname)}/>
+            <SortingNameCard
+              key={index}
+              name={algoname}
+              onClick={() => setSelectedAlgo(algoname)}
+            />
           ))}
         </div>
         <br />
@@ -70,11 +80,11 @@ const Home = () => {
               },
             })
           }
-          >
+        >
           Start
         </button>
         <div className="baseline">
-            <h4 className="tagline">Copowered by Copilot 🤖</h4>
+          <h4 className="tagline">Made with Love</h4>
         </div>
       </div>
     </>

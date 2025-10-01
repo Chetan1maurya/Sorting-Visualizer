@@ -1,5 +1,5 @@
 .sorting_box {
-  position: relative; /* now inside wrapper */
+  position: relative; 
   z-index: 1;
   padding: 1rem;
   width: 20vw;
@@ -7,7 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: clamp(1rem, 3vmin, 1.7rem); /* responsive font size */
+  font-size: clamp(1rem, 3vmin, 1.7rem); 
   font-weight: 800;
   color: white;
   cursor: pointer;   
@@ -16,7 +16,7 @@
 }
 
 .sorting_box:hover {
-  transform: scale(1.05); /* subtle hover scale */
+  transform: scale(1.05); 
 }
 
 @keyframes spin {
@@ -28,7 +28,6 @@
   }
 }
 
-/* Responsive tweaks */
 @media (max-width: 1270px) {
   .sorting_box {
     width: 32vw;

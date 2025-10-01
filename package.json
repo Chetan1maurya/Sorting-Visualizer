@@ -10,8 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@copilotkit/react-core": "^1.10.1",
-    "@copilotkit/react-ui": "^1.10.1",
     "framer-motion": "^12.23.22",
     "install": "^0.13.0",
     "npm": "^11.6.1",
@@ -20,7 +18,9 @@
     "react-router-dom": "^7.9.2",
     "react-tsparticles": "^2.12.2",
     "react-type-animation": "^3.2.0",
-    "tsparticles": "^3.9.1"
+    "tsparticles": "^3.9.1",
+    "tsparticles-slim": "^2.12.0",
+    "vite-plugin-svgr": "^4.5.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

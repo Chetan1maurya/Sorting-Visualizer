@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
 import "./CSS files/Sorting.css";
+
 const Graph = ({
   arr,
   compIndices,
@@ -15,9 +16,8 @@ const Graph = ({
   setComparison,
   waitWhilePaused,
 }) => {
-  // const [step, setStep] = useState("");
-  // const [message, setMessage] = useState("");
   const [speed, setSpeed] = useState(1);
+  const [isRunning, setIsRunning] = useState(false);
   const speedRef = useRef(1);
   const handleSpeed = (val, name) => {
     if (name == "dec" && val >= 1) {
@@ -29,9 +29,29 @@ const Graph = ({
       setSpeed(val);
     }
   };
+  const handleStart = async() => {
+    console.log(isRunning)
+    if(isRunning){
+      return;
+    }
+    setIsRunning(true);
+    await funcName(
+      arr,
+      setArr,
+      setCompIndices,
+      setStep,
+      setComparison,
+      setMessage,
+      speedRef,
+      waitWhilePaused
+    );
+    setIsRunning(false);
+  };
   return (
+    <>
     <div className="main-box">
       <div className="box1">
+        <div className="shape2"></div>
         <div className="graph">
           {arr.map((num, index) => (
             <div
@@ -50,22 +70,8 @@ const Graph = ({
           <button className="graph-control" onClick={() => setPaused(!paused)}>
             {paused ? "Resume" : "Pause"}
           </button>
-          <button
-            className="graph-control"
-            onClick={() =>
-              funcName(
-                arr,
-                setArr,
-                setCompIndices,
-                setStep,
-                setComparison,
-                setMessage,
-                speedRef,
-                waitWhilePaused
-              )
-            }
-          >
-            Start
+          <button className={`graph-control ${isRunning ? "diabled" : ""}`} onClick={handleStart}>
+            {isRunning ? "Sorting...": "Start"}
           </button>
         </div>
         <div className="speed-control">
@@ -92,6 +98,7 @@ const Graph = ({
       </div>
       <h1>{name}</h1>
     </div>
+  </>
   );
 };
 
