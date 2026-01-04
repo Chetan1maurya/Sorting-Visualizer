@@ -87,6 +87,49 @@
   bottom: 1rem;   
   text-align: center;                           
 }
+.comparison{
+   width: 100%;
+   min-height: 100vh;
+   background: radial-gradient(circle at bottom, #1a1c57, #0d0d2b);
+   overflow:hidden;
+   display:flex;
+   justify-content: space-around;
+   align-items: center;
+   flex-direction: column;
+}
+.comparison::before{
+  content: "";
+  position:absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background: transparent url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
+  animation: starsMove 100s linear infinite;
+}
+.comparison h4{
+  color:white;
+  font-size: 5rem;
+  font-weight: 150;
+  text-align: center;
+}
+.showImage{
+  background-color: transparent;
+  color:white;
+  height: 40rem;
+  width: 60rem;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0 0 4em #646cffaa);
+}
+.showImage .image{
+  height: 90%;
+  width: 90%;
+}
+@keyframes starsMove {
+  from { transform: translate(0, 0); }
+  to { transform: translate(-500px, -500px); }
+}
 @media (max-width: 768px) {
   .app-heading {
     font-size: 2.5rem;

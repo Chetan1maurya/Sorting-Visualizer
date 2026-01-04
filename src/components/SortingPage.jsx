@@ -4,11 +4,14 @@ import { useLocation } from "react-router-dom";
 import "./CSS files/Sorting.css";
 import Graph from "./Graph.jsx";
 import TCModal from "./TCModal.jsx";
+import Steps from "./Steps.jsx";
 import ExploreModal from "./ExploreModal.jsx";
 import Sorting from "../assets/sorting.svg?react";
 import Divider from "../assets/divider.svg?react";
 import Opening from "../assets/opening.svg?react";
 import Closing from "../assets/closing.svg?react";
+import Space from "../assets/space.svg?react";
+import { motion } from "framer-motion";
 
 import {
   bubbleSort,
@@ -27,7 +30,7 @@ const SortingPage = () => {
   const [comparison, setComparison] = useState(0);
   const [paused, setPaused] = useState(false);
   const pausedRef = useRef(false);
-  const [showTCModal, setShowTCModal] = useState(false);
+  const cancelRef = useRef(false);
   const [showExploreModal, setShowExploreModal] = useState(false);
   const algoFunctions = {
     "Bubble Sorting": bubbleSort,
@@ -39,40 +42,19 @@ const SortingPage = () => {
   };
   const location = useLocation();
   const { algo } = location.state || {};
+  if (!algo) {
+    return <div>Error: No algorithm selected</div>;
+  }
   const funcName = algoFunctions[algo];
-  console.log(funcName.name);
   const name = algo;
-  console.log(algo);
-  const time_complexity = {
-    bubbleSort: "O(n²)",
-    selectionSort: "O(n²)",
-    insertionSort: "O(n²)",
-    mergeSort: "O(n log n)",
-    quickSort: "O(n log n)",
-    heapSort: "O(n log n)",
-  };
-  const space_complexity = {
-    bubbleSort: "O(1)",
-    selectionSort: "O(1)",
-    insertionSort: "O(1)",
-    mergeSort: "O(n)",
-    quickSort: "O(log n)",
-    heapSort: "O(1)",
-  };
-  const details = {
-    bubbleSort: "Inplace, Stable",
-    selectionSort: "Inplace, not stable",
-    insertionSort: "Inplace, Stable",
-    mergeSort: "Not inplace, Stable",
-    quickSort: "Inplace, not stable",
-    heapSort: "Inplace, not stable",
-  };
 
   const waitWhilePaused = async () => {
-    while (pausedRef?.current) {
+    while (pausedRef.current && !cancelRef.current) {
       await new Promise((res) => setTimeout(res, 100));
     }
+    if (cancelRef.current) throw new Error("Cancelled");
   };
+
   useEffect(() => {
     pausedRef.current = paused;
   }, [paused]);
@@ -101,17 +83,17 @@ const SortingPage = () => {
   };
   const workingSteps = {
     selectionSort:
-      "1). Find the minimum element in the unsorted part. \n\n 2). Swap it with the first element of the unsorted part. \n\n 3). Move boundary forward, repeat until array is sorted.",
+      " Find the minimum element in the unsorted part. \n\n  Swap it with the first element of the unsorted part. \n\n  Move boundary forward, repeat until array is sorted.",
     bubbleSort:
-      "1). Start from the first element. \n\n 2). Compare it with the next element. \n\n 3). If they are in the wrong order → swap them. \n\n 4). Move to the next pair, repeat till the last element. \n\n 5). After 1 pass → largest element is at the end. \n\n 6). Repeat passes for remaining unsorted part until no swaps are needed.",
+      " Start from the first element. \n\n  Compare it with the next element. \n\n  If they are in the wrong order → swap them. \n\n  Move to the next pair, repeat till the last element. \n\n  After 1 pass → largest element is at the end. \n\n  Repeat passes for remaining unsorted part until no swaps are needed.",
     insertionSort:
-      "1). Start from the second element (first is already “sorted”). \n\n 2). Take the current element → call it key. \n\n 3). Compare key with elements in the sorted part (to the left). \n\n 4). Shift all larger elements one position right. \n\n 5). Insert key into its correct place. \n\n 6). Repeat for all elements until array is sorted.",
+      " Start from the second element (first is already “sorted”). \n\n  Take the current element → call it key. \n\n  Compare key with elements in the sorted part (to the left). \n\n  Shift all larger elements one position right. \n\n  Insert key into its correct place. \n\n  Repeat for all elements until array is sorted.",
     mergeSort:
-      "1). Divide the array into two halves. \n\n 2). Recursively divide each half until only one element remains. \n\n 3). Merge two sorted halves into one sorted array: \n Compare elements from both halves. \n Pick smaller one and place in output. \n Repeat until all elements are merged. \n\n 4). Continue merging back up until full array is sorted.",
+      " Divide the array into two halves. \n\n Recursively divide each half until only one element remains. \n\n Merge two sorted halves into one sorted array: \n Compare elements from both halves. \n Pick smaller one and place in output. \n Repeat until all elements are merged. \n\n Continue merging back up until full array is sorted.",
     quickSort:
-      "1). Pick a pivot element (first/last/random). \n\n 2). Partition array: \n Place all smaller elements on left. \n Place all larger elements on right. \n Pivot goes in its correct position. \n\n 3). Recursively apply Quick Sort to left and right partitions. 4). Continue until subarrays have size 1.",
+      " Pick a pivot element (first/last/random). \n\n  Partition array: \n Place all smaller elements on left. \n Place all larger elements on right. \n Pivot goes in its correct position. \n\n  Recursively apply Quick Sort to left and right partitions.  Continue until subarrays have size 1.",
     heapSort:
-      "1). Build a max heap (largest element at root). \n\n 2). Swap root (largest) with last element of heap. \n\n 3). Reduce heap size by 1. \n\n 4). Heapify the root to maintain heap property. \n\n 5). Repeat steps 2–4 until heap size becomes 1.",
+      " Build a max heap (largest element at root). \n\n  Swap root (largest) with last element of heap. \n\n  Reduce heap size by 1. \n\n  Heapify the root to maintain heap property. \n\n  Repeat steps 2–4 until heap size becomes 1.",
   };
   const definitions = {
     selectionSort:
@@ -164,21 +146,6 @@ const SortingPage = () => {
               )}
             </div>
             <div className="detail-card">
-              Working of {name}
-              <button className="getInfo" onClick={() => setShowTCModal(true)}>
-                <i class="ri-send-plane-fill"></i>
-              </button>
-              <TCModal
-                isOpen={showTCModal}
-                onClose={() => setShowTCModal(false)}
-              >
-                <div className="tcandsc">
-                  <h4>Steps: </h4>
-                  <p>{workingSteps[funcName.name]}</p>
-                </div>
-              </TCModal>
-            </div>
-            <div className="detail-card">
               Number of Comparision are :{" "}
               <span style={{ color: "white", fontSize: "60px" }}>
                 {comparison}{" "}
@@ -205,18 +172,55 @@ const SortingPage = () => {
           </div>
         </div>
       </div>
-      <Divider className="partition"/>
+      <div className="steps">
+        <h4>Steps Involved in Algo</h4>
+        <div className="parts">
+          <Steps step={workingSteps[funcName.name]} />
+          <div className="spaceSvg">
+            <Space className="space" />
+          </div>
+        </div>
+      </div>
+      <Divider className="partition" />
       <div className="definition">
-        <div className="circle">
+        <motion.div
+          className="circle"
+          initial={{
+            scale: 0.8,
+            opacity: 0,
+          }}
+          whileInView={{
+            scale: 1,
+            opacity: 1,
+          }}
+          transition={{
+            duration: 1,
+            ease: "easeOut",
+          }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
           <Sorting className="mensvg" />
-        </div>
-        <div className="sortdef">
-          <Opening className="braces"/>
-          <div className="shape"></div>
+        </motion.div>
+        <motion.div
+          className="sortdef"
+          initial={{
+            scale: 0.8,
+            opacity: 0,
+          }}
+          whileInView={{
+            scale: 1,
+            opacity: 1,
+          }}
+          transition={{
+            duration: 1,
+            ease: "easeOut",
+          }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <Opening className="braces" />
           {definitions[funcName.name]}
-          <Closing className="braces"/>
-          <p>{name}</p>
-        </div>
+          <Closing className="braces" />
+        </motion.div>
       </div>
     </>
   );

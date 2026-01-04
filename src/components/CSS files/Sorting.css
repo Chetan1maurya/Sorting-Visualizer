@@ -23,6 +23,7 @@
   align-items: center;
   max-width: 80rem;
 }
+
 .graph {
   display: flex;
   justify-content: center;
@@ -33,6 +34,7 @@
   flex-wrap:nowrap;
   max-width: 70rem;
 }
+
 .shape2{
   height: 200px;
   width: 200px;
@@ -43,6 +45,7 @@
   z-index: 0;
   filter: blur(10rem);
 }
+
 .bar {
   flex: 1 1 auto; 
   min-width: 7px;
@@ -60,8 +63,9 @@
 }
 
 .comparing {
-  background-color: rgb(104, 211, 5);
+  background-color: rgb(63, 206, 231);
 }
+
 .speed{
   font-size: 20px;
   color:rgb(255, 255, 255);
@@ -70,6 +74,7 @@
   padding: 0 3vmax 0 3vmax;
   border-radius: 5px;
 }
+
 .buttons {
   width: 70%;
   display: flex;
@@ -105,6 +110,14 @@
 }
 .graph-control.diabled{
     background-color: rgb(255, 52, 52);
+}
+.graph-control.paused{
+  background-color: rgb(5, 165, 5);
+  color:white;
+}
+.graph-control.normal{
+  background-color: red;
+  color:white;
 }
 .main-box h1 {
   color: white;
@@ -210,7 +223,38 @@
 .detail-card .getInfo:hover{
   transform:rotate(50deg);
 }
-
+.steps{
+  width: 100%;
+  background: 
+  linear-gradient(45deg, rgb(18,18,58), rgb(20,20,60), rgb(15,15,50)),
+  radial-gradient(circle at center, rgba(255,255,255,0.05), transparent);
+  width: 100%;
+  min-height: 100vh;
+}
+.parts{
+  padding: 3rem;
+  display:flex;
+  justify-content: center;
+}
+.spaceSvg{
+  width: 50%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+.space{
+   width: 80%;
+}
+.space:hover{
+  filter: drop-shadow(0 0 4em #646cffaa);
+}
+.steps h4{
+  font-size: 4rem;
+  color: white;
+  text-align: center;
+  font-weight: 100;
+  padding: 5rem 3rem 2rem;
+}
 .definition{
     background: 
   linear-gradient(45deg, rgb(18,18,58), rgb(20,20,60), rgb(15,15,50)),
@@ -224,7 +268,7 @@
 }
 .sortdef{
   color:white;
-  font-size: 3vh;
+  font-size: 2.5vh;
   padding: 1.5rem;
   width: 40%;
   text-align: center;
@@ -238,11 +282,6 @@
   filter: drop-shadow(0 0 2em #646cffaa);
   z-index: 0;
   filter: blur(10rem);
-}
-.sortdef p{
-  white-space: nowrap;
-  font-size: 2.5rem;
-  color:white;
 }
 .partition{
   position:absolute;
@@ -275,7 +314,7 @@
   transition: all 300ms;
 }
 .circle:hover{
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 4em #646cffaa);
 }
 @keyframes fadeIn {
   from {
@@ -330,7 +369,7 @@
     flex-direction: column;
   }
   .sortdef{
-    font-size: 4vh;
+    font-size: 3vh;
     width: 100%;
   }
   .sortdef p{
@@ -339,6 +378,19 @@
   }
   .braces{
     height: 3rem;
+  }
+  .parts{
+    display:block;
+  }
+  .spaceSvg{
+    width: 100%;
+    justify-content: center;
+  }
+  .space{
+    width: 60%;
+  }
+  .steps h4{
+    font-size: 3rem;
   }
 }
 
@@ -362,11 +414,11 @@
     padding: 1.5rem;
   }
   .sortdef{
-    font-size: 3vh;
+    font-size: 2.5vh;
     width: 100%;
   }
-  .sortdef p{
-    font-size: 1.5rem;
+  .definition{
+    padding: 1rem;
   }
   .buttons {
     flex-direction: row;
@@ -396,6 +448,14 @@
   .detail-card .getInfo {
     font-size: 1.5rem;
   }
+  .space{
+    width: 100%;
+    margin: 3rem 0 3rem 0;
+    height: 25rem;
+  }
+  .steps h4{
+    font-size: 7vw;
+  }
 }
 @media(max-width: 480px){
   .buttons{
@@ -416,10 +476,23 @@
   .speed{
     width: 100%;
   }
-  .sortdef p{
-  white-space: wrap;
-  text-align: center;
-  font-size: 2.5rem;
-  color:white;
-}
+.space{
+    width: 100%;
+    margin: 3rem 0 3rem 0;
+    height: 15rem;
+  }
+  .steps h4{
+    font-size: 8.5vw;
+    padding: 2rem 0.78rem;
+  }
+  .parts{
+    padding: 2rem;
+  }
+   .sortdef{
+    font-size: 2.4vh;
+    width: 100%;
+  }
+  .definition{
+    padding: 1rem;
+  }
 }

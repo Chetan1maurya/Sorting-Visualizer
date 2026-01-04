@@ -18,7 +18,10 @@
 .sorting_box:hover {
   transform: scale(1.05); 
 }
-
+.sorting_box.select{
+  background-color:rgb(255, 255, 255);
+  color:rgb(24, 24, 199);
+}
 @keyframes spin {
   0% {
     transform: translate(-50%, -50%) rotate(0deg);

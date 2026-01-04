@@ -1,0 +1,71 @@
+.timeline {
+  width: 50%;
+  color: white;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+  justify-content: center;
+  
+}
+
+/* vertical dashed line in center */
+.timeline::before {
+  content: "";
+  position: absolute;
+  background: linear-gradient(
+    to bottom,
+    #4fc3f7,
+    #07425f,
+    #4fc3f7
+  );
+  z-index: 0;
+  top: 1rem;
+  bottom: 1rem;
+  left: 0;
+  width: 3px;
+}
+
+
+
+.step {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: 1rem 0 1rem 0;
+  margin-left: 20px;
+  position: relative;
+}
+.step::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -29px;
+  background-color: #4fc3f7;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+
+/* Step content box */
+.icon {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.8rem 1.2rem;
+  border-radius: 0 10px 10px 10px;
+  border: 1px solid #4fc3f7;
+  flex: 1;
+  position: relative;
+}
+
+@media (max-width: 1024px){
+    .timeline{
+        width: 100%;
+    }
+}
+@media (max-width: 480px){
+    .step{
+        font-size: 1rem;
+    }
+}

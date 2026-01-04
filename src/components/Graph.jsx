@@ -29,9 +29,14 @@ const Graph = ({
       setSpeed(val);
     }
   };
+  const handlePause = async() => {
+     if(isRunning){
+       setPaused(!paused)
+       setIsRunning(!isRunning);
+      }
+  }
   const handleStart = async() => {
-    console.log(isRunning)
-    if(isRunning){
+    if(isRunning || paused){
       return;
     }
     setIsRunning(true);
@@ -67,7 +72,7 @@ const Graph = ({
           ))}
         </div>
         <div className="buttons">
-          <button className="graph-control" onClick={() => setPaused(!paused)}>
+          <button className={`graph-control ${paused ? "paused": "normal"}`} onClick={handlePause}>
             {paused ? "Resume" : "Pause"}
           </button>
           <button className={`graph-control ${isRunning ? "diabled" : ""}`} onClick={handleStart}>
